@@ -19,7 +19,6 @@ export default function TransporterAo({ inn, prevStep, nextStep }) {
   const [order, setOrder] = useState({ message: null, files: [] });
   const [charter, setCharter] = useState({ message: null, files: [] });
   
-
   const submitForm = async (event) => {
     event.preventDefault();
     
@@ -53,7 +52,6 @@ export default function TransporterAo({ inn, prevStep, nextStep }) {
     setRequestStatus(reqBody.result);
   };
 
-
   useEffect(function checkFields() {
     if (partnerDetails.files.length > 0 && innCard.files.length > 0 && orrnCard.files.length > 0 && order.files.length > 0 && charter.files.length > 0) {
       setAllow(true);
@@ -61,7 +59,6 @@ export default function TransporterAo({ inn, prevStep, nextStep }) {
       setAllow(false);
     }
   }, [partnerDetails, innCard, orrnCard, order, charter]);
-
 
   useEffect(function next() {
     if (requestStatus === 'success') nextStep();
@@ -71,7 +68,6 @@ export default function TransporterAo({ inn, prevStep, nextStep }) {
   return (
     <Box>
       <form onSubmit={submitForm}>
-
         <FilesUploader
           label="Реквизиты партрнера"
           textHelper="Загрузите карту партнера"
@@ -124,15 +120,6 @@ export default function TransporterAo({ inn, prevStep, nextStep }) {
           </Box>
         )}
 
-        {/* <Button
-          style={{ marginTop: 16, marginRight: 16 }}
-          variant="contained"
-          color="default"
-          onClick={prevStep}
-        >
-          Назад
-        </Button> */}
-
         <Button
           type="submit"
           style={{ marginTop: 16 }}
@@ -142,7 +129,6 @@ export default function TransporterAo({ inn, prevStep, nextStep }) {
         >
           Далее
         </Button>
-
       </form>
     </Box>
   )

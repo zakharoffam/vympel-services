@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import {
   Typography,
@@ -8,6 +8,7 @@ import {
   StepContent,
   Paper,
   Link,
+  Box,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -50,7 +51,6 @@ export default function Contract() {
   const [partnerType, setPartnerType] = useState('ИП');
   const [inn, setInn] = useState({ message: null, value: ''});
 
-
   const nextStep = () => {
     setActiveStep(activeStep + 1);
   };
@@ -59,14 +59,15 @@ export default function Contract() {
     setActiveStep(activeStep - 1);
   };
 
+  
   return (
     <div className={classes.root}>
-      <p className={classes.img}>
+      <Box className={classes.img}>
         <img src="../logo.png" alt="logo" height="100" />
         <Typography variant="h6">
           Форма для сбора документов перевозчика, при заключении договора с <Link href="http://www.tekvympel.ru/" target="_blank">ТЭК "Вымпел"</Link>
         </Typography>
-      </p>
+      </Box>
 
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => (

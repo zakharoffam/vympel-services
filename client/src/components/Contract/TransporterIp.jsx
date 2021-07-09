@@ -18,7 +18,6 @@ export default function TransporterIp({ inn, prevStep, nextStep }) {
   const [passport1, setPassport1] = useState({ message: null, files: [] });
   const [passport2, setPassport2] = useState({ message: null, files: [] });
   
-
   const submitForm = async (event) => {
     event.preventDefault();
     
@@ -49,7 +48,6 @@ export default function TransporterIp({ inn, prevStep, nextStep }) {
     setRequestStatus(reqBody.result);
   };
 
-
   useEffect(function checkFields() {
     if (partnerDetails.files.length > 0 && innCard.files.length > 0 && passport1.files.length > 0 && passport2.files.length > 0 ) {
       setAllow(true);
@@ -57,7 +55,6 @@ export default function TransporterIp({ inn, prevStep, nextStep }) {
       setAllow(false);
     }
   }, [partnerDetails, innCard, passport1, passport2]);
-
 
   useEffect(function next() {
     if (requestStatus === 'success') nextStep();
@@ -67,7 +64,6 @@ export default function TransporterIp({ inn, prevStep, nextStep }) {
   return (
     <Box>
       <form onSubmit={submitForm}>
-
         <FilesUploader
           label="Реквизиты партрнера"
           textHelper="Загрузите карту партнера"
@@ -111,15 +107,6 @@ export default function TransporterIp({ inn, prevStep, nextStep }) {
           </Box>
         )}
 
-        {/* <Button
-          style={{ marginTop: 16, marginRight: 16 }}
-          variant="contained"
-          color="default"
-          onClick={prevStep}
-        >
-          Назад
-        </Button> */}
-
         <Button
           type="submit"
           style={{ marginTop: 16 }}
@@ -129,7 +116,6 @@ export default function TransporterIp({ inn, prevStep, nextStep }) {
         >
           Далее
         </Button>
-
       </form>
     </Box>
   )

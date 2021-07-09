@@ -75,7 +75,7 @@ export default function AutoDocs({ inn, prevStep, nextStep }) {
           type="text"
           required
           value={number.value}
-          error={number.message}
+          error={number.message ? true : false}
           helperText={number.message}
           onChange={(event) => {
             setNumber({
@@ -118,15 +118,6 @@ export default function AutoDocs({ inn, prevStep, nextStep }) {
             <Typography variant="body2">Отправка данных...</Typography>
           </Box>
         )}
-
-        {/* <Button
-          style={{ marginTop: 16, marginRight: 16 }}
-          variant="contained"
-          color="default"
-          onClick={prevStep}
-        >
-          Назад
-        </Button> */}
 
         <Button
           type="submit"

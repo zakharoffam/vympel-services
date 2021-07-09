@@ -95,7 +95,7 @@ export default function Partner({ logist, partnerType, setPartnerType, inn, setI
           type="text"
           required
           value={name.value}
-          error={name.message}
+          error={name.message ? true : false}
           helperText={name.message}
           onChange={(event) => {
             setName({
@@ -113,7 +113,7 @@ export default function Partner({ logist, partnerType, setPartnerType, inn, setI
           type="text"
           required
           value={codeAti.value}
-          error={codeAti.message}
+          error={codeAti.message ? true : false}
           helperText={codeAti.message}
           onChange={(event) => {
             setCodeAti({
@@ -131,7 +131,7 @@ export default function Partner({ logist, partnerType, setPartnerType, inn, setI
           type="text"
           required
           value={inn.value}
-          error={inn.message}
+          error={inn.message ? true : false}
           helperText={inn.message}
           onChange={(event) => {
             setInn({

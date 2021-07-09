@@ -89,7 +89,7 @@ export default function Recommendations({ inn, prevStep, nextStep }) {
           type="text"
           required
           value={name1.value}
-          error={name1.message}
+          error={name1.message ? true : false}
           helperText={name1.message}
           onChange={(event) => {
             setName1({
@@ -107,7 +107,7 @@ export default function Recommendations({ inn, prevStep, nextStep }) {
           type="text"
           required
           value={fio1.value}
-          error={fio1.message}
+          error={fio1.message ? true : false}
           helperText={fio1.message}
           onChange={(event) => {
             setFio1({
@@ -125,7 +125,7 @@ export default function Recommendations({ inn, prevStep, nextStep }) {
           type="text"
           required
           value={tel1.value}
-          error={tel1.message}
+          error={tel1.message ? true : false}
           helperText={tel1.message}
           onChange={(event) => {
             setTel1({
@@ -145,7 +145,7 @@ export default function Recommendations({ inn, prevStep, nextStep }) {
           type="text"
           required
           value={name2.value}
-          error={name2.message}
+          error={name2.message ? true : false}
           helperText={name2.message}
           onChange={(event) => {
             setName2({
@@ -163,7 +163,7 @@ export default function Recommendations({ inn, prevStep, nextStep }) {
           type="text"
           required
           value={fio2.value}
-          error={fio2.message}
+          error={fio2.message ? true : false}
           helperText={fio2.message}
           onChange={(event) => {
             setFio2({
@@ -181,7 +181,7 @@ export default function Recommendations({ inn, prevStep, nextStep }) {
           type="text"
           required
           value={tel2.value}
-          error={tel2.message}
+          error={tel2.message ? true : false}
           helperText={tel2.message}
           onChange={(event) => {
             setTel2({
@@ -200,7 +200,7 @@ export default function Recommendations({ inn, prevStep, nextStep }) {
           label="Название фирмы участника АТИ"
           type="text"
           value={name3.value}
-          error={name3.message}
+          error={name3.message ? true : false}
           helperText={name3.message}
           onChange={(event) => {
             setName3({
@@ -217,7 +217,7 @@ export default function Recommendations({ inn, prevStep, nextStep }) {
           label="ФИО контактного лица"
           type="text"
           value={fio3.value}
-          error={fio3.message}
+          error={fio3.message ? true : false}
           helperText={fio3.message}
           onChange={(event) => {
             setFio3({
@@ -234,7 +234,7 @@ export default function Recommendations({ inn, prevStep, nextStep }) {
           label="Телефон контактного лица"
           type="text"
           value={tel3.value}
-          error={tel3.message}
+          error={tel3.message ? true : false}
           helperText={tel3.message}
           onChange={(event) => {
             setTel3({

@@ -7,6 +7,7 @@ import {
 import {
   Typography,
   Link,
+  Box,
 } from '@material-ui/core';
 
 import Contract from './components/Contract/Contract';
@@ -19,12 +20,12 @@ function App() {
       <Switch>
 
         <Route path="/" exact>
-          <p style={{ textAlign: 'center' }}>
+          <Box style={{ textAlign: 'center' }}>
             <img src="../logo.png" alt="logo" height="100" />
             <Typography variant="h6">
               <Link href="http://www.tekvympel.ru/" target="_blank">ТЭК "Вымпел"</Link>
             </Typography>
-          </p>
+          </Box>
         </Route>
         
         <Route path="/contract/:logist" exact>
@@ -36,7 +37,12 @@ function App() {
         </Route>
 
         <Route path="/" >
-          <Typography>404</Typography>
+          <Box style={{ textAlign: 'center' }}>
+            <img src="../logo.png" alt="logo" height="100" />
+            <Typography variant="h6">
+              <Link href="http://www.tekvympel.ru/" target="_blank">ТЭК "Вымпел"</Link>
+            </Typography>
+          </Box>
         </Route>
 
       </Switch>

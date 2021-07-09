@@ -70,7 +70,6 @@ export default function DriverDocs({ inn, prevStep, nextStep }) {
   return (
     <Box>
       <form onSubmit={submitForm}>
-
         <TextField
           style={{ marginTop: 16 }}
           variant="outlined"
@@ -79,7 +78,7 @@ export default function DriverDocs({ inn, prevStep, nextStep }) {
           type="text"
           required
           value={numberPass.value}
-          error={numberPass.message}
+          error={numberPass.message ? true : false}
           helperText={numberPass.message}
           onChange={(event) => {
             setNumberPass({
@@ -132,15 +131,6 @@ export default function DriverDocs({ inn, prevStep, nextStep }) {
           </Box>
         )}
 
-        {/* <Button
-          style={{ marginTop: 16, marginRight: 16 }}
-          variant="contained"
-          color="default"
-          onClick={prevStep}
-        >
-          Назад
-        </Button> */}
-
         <Button
           type="submit"
           style={{ marginTop: 16 }}
@@ -150,7 +140,6 @@ export default function DriverDocs({ inn, prevStep, nextStep }) {
         >
           Далее
         </Button>
-
       </form>
     </Box>
   )
