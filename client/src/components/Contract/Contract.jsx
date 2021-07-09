@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   Typography,
@@ -22,6 +22,9 @@ import { useParams } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
+  },
+  img: {
+    textAlign: 'center'
   },
   button: {
     marginTop: theme.spacing(1),
@@ -58,6 +61,13 @@ export default function Contract() {
 
   return (
     <div className={classes.root}>
+      <p className={classes.img}>
+        <img src="../logo.png" alt="logo" height="100" />
+        <Typography variant="h6">
+          Форма для сбора документов перевозчика, при заключении договора с <Link href="http://www.tekvympel.ru/" target="_blank">ТЭК "Вымпел"</Link>
+        </Typography>
+      </p>
+
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => (
           <Step key={label}>
@@ -96,6 +106,7 @@ export default function Contract() {
                   nextStep={nextStep}
                 />
               }
+              
               {activeStep === 3 && 
                 <DriverDocs
                   inn={inn}
@@ -103,6 +114,7 @@ export default function Contract() {
                   nextStep={nextStep}
                 />
               }
+
               {activeStep === 4 && 
                 <Recommendations
                   inn={inn}
@@ -110,16 +122,17 @@ export default function Contract() {
                   nextStep={nextStep}
                 />
               }
-
-              
             </StepContent>
           </Step>
         ))}
       </Stepper>
       {activeStep === steps.length && (
         <Paper square elevation={0} className={classes.resetContainer}>
-          <Typography>Спасибо за уделенное время.</Typography>
-          <Link href="http://www.tekvympel.ru/" target="_blank">Перейти на сайт ТЭК "Вымпел"</Link>
+          <Typography>
+            Благодарим Вас за заполнение формы. 
+            Приглашаем Перевозчиков к работе на постоянной основе.
+            Перейти на сайт <Link href="http://www.tekvympel.ru/" target="_blank">ТЭК "Вымпел"</Link>
+          </Typography>
         </Paper>
       )}
     </div>

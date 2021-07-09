@@ -30,13 +30,13 @@ export default function AutoDocs({ inn, prevStep, nextStep }) {
     formData.append('Гос. номер ТС', number.value);
 
     for (let i = 0; i < ptsAuto.files.length; i++) {
-      formData.append('ПТС или СРТС ТС', ptsAuto.files[i]);
+      formData.append(`ПТС или СРТС ТС ${i + 1}`, ptsAuto.files[i]);
     }
     for (let i = 0; i < ptsPric.files.length; i++) {
-      formData.append('ПТС или СРТС прицепа', ptsPric.files[i]);
+      formData.append(`ПТС или СРТС прицепа ${i + 1}`, ptsPric.files[i]);
     }
     for (let i = 0; i < lease.files.length; i++) {
-      formData.append('Договор аренды ТС', lease.files[i]);
+      formData.append(`Договор аренды ТС ${i + 1}`, lease.files[i]);
     }
     
     const res = await fetch(`http://${window.location.hostname}:8080/contract/${inn.value}`, {

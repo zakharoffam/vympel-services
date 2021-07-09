@@ -6,9 +6,11 @@ import {
 
 import {
   Typography,
+  Link,
 } from '@material-ui/core';
 
 import Contract from './components/Contract/Contract';
+import Pers from './components/Contract/Pers';
 
 
 function App() {
@@ -17,11 +19,20 @@ function App() {
       <Switch>
 
         <Route path="/" exact>
-          <Typography>Главная</Typography>
+          <p style={{ textAlign: 'center' }}>
+            <img src="../logo.png" alt="logo" height="100" />
+            <Typography variant="h6">
+              <Link href="http://www.tekvympel.ru/" target="_blank">ТЭК "Вымпел"</Link>
+            </Typography>
+          </p>
         </Route>
         
         <Route path="/contract/:logist" exact>
           <Contract />
+        </Route>
+
+        <Route path="/pers/" exact>
+          <Pers />
         </Route>
 
         <Route path="/" >

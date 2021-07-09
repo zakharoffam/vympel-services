@@ -12,6 +12,7 @@ import {
   FormControl,
   FormLabel,
   LinearProgress,
+  Link,
 } from '@material-ui/core';
 
 
@@ -83,7 +84,6 @@ export default function Partner({ logist, partnerType, setPartnerType, inn, setI
           <RadioGroup aria-label="gender" name="gender1" value={partnerType} onChange={(event) => setPartnerType(event.target.value)}>
             <FormControlLabel value="ИП" control={<Radio />} label="ИП" />
             <FormControlLabel value="ООО или АО" control={<Radio />} label="ООО или АО" />
-            {/* <FormControlLabel value="АО" control={<Radio />} label="АО" /> */}
           </RadioGroup>
         </FormControl>
 
@@ -140,6 +140,10 @@ export default function Partner({ logist, partnerType, setPartnerType, inn, setI
             });
           }}
         />
+
+        <Typography style={{ marginTop: 16 }} variant="body1">
+          <Link href="/pers" target="_blank">Политика обработки персональных данных</Link>
+        </Typography>
 
         <FormControlLabel
           control={

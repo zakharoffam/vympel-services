@@ -28,19 +28,19 @@ export default function DriverDocs({ inn, prevStep, nextStep }) {
     setRequestStatus('loading');
 
     const formData = new FormData();
-    formData.append('Серия и номер паспорта водителя', numberPass.value);
+    formData.append(`Серия и номер паспорта водителя`, numberPass.value);
 
     for (let i = 0; i < pass1.files.length; i++) {
-      formData.append('Паспорт водителя (первая страница)', pass1.files[i]);
+      formData.append(`Паспорт водителя (первая страница) ${i + 1}`, pass1.files[i]);
     }
     for (let i = 0; i < pass2.files.length; i++) {
-      formData.append('Паспорт водителя (прописка)', pass2.files[i]);
+      formData.append(`Паспорт водителя (прописка) ${i + 1}`, pass2.files[i]);
     }
     for (let i = 0; i < driverOrder.files.length; i++) {
-      formData.append('Водительское удостоверение', driverOrder.files[i]);
+      formData.append(`Водительское удостоверение ${i + 1}`, driverOrder.files[i]);
     }
     for (let i = 0; i < order.files.length; i++) {
-      formData.append('Трудовой договор', order.files[i]);
+      formData.append(`Трудовой договор ${i + 1}`, order.files[i]);
     }
     
     const res = await fetch(`http://${window.location.hostname}:8080/contract/${inn.value}`, {

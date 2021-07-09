@@ -9,15 +9,14 @@ import {
  
 import FilesUploader from './FileUploader';
 
-export default function TransporterAo({ inn, prevStep, nextStep }) {
+export default function TransporterIp({ inn, prevStep, nextStep }) {
   const [allow, setAllow] = useState(false);
   const [requestStatus, setRequestStatus] = useState('idle');
 
   const [partnerDetails, setPartnerDetails] = useState({ message: null, files: [] });
   const [innCard, setInnCard] = useState({ message: null, files: [] });
-  const [orrnCard, setOgrnCard] = useState({ message: null, files: [] });
-  const [order, setOrder] = useState({ message: null, files: [] });
-  const [charter, setCharter] = useState({ message: null, files: [] });
+  const [passport1, setPassport1] = useState({ message: null, files: [] });
+  const [passport2, setPassport2] = useState({ message: null, files: [] });
   
 
   const submitForm = async (event) => {
@@ -29,19 +28,16 @@ export default function TransporterAo({ inn, prevStep, nextStep }) {
     const formData = new FormData();
 
     for (let i = 0; i < partnerDetails.files.length; i++) {
-      formData.append('Реквизиты партнера', partnerDetails.files[i]);
+      formData.append(`Реквизиты партнера ${i + 1}`, partnerDetails.files[i]);
     }
     for (let i = 0; i < innCard.files.length; i++) {
-      formData.append('Свидетельство ИНН', innCard.files[i]);
+      formData.append(`Свидетельство ИНН ${i + 1}`, innCard.files[i]);
     }
-    for (let i = 0; i < orrnCard.files.length; i++) {
-      formData.append('Свидетельство ОГРН', orrnCard.files[i]);
+    for (let i = 0; i < passport1.files.length; i++) {
+      formData.append(`Паспорт (основная) ${i + 1}`, passport1.files[i]);
     }
-    for (let i = 0; i < order.files.length; i++) {
-      formData.append('Приказ о назначении', order.files[i]);
-    }
-    for (let i = 0; i < charter.files.length; i++) {
-      formData.append('Устав', charter.files[i]);
+    for (let i = 0; i < passport2.files.length; i++) {
+      formData.append(`Паспорт (прописка) ${i + 1}`, passport2.files[i]);
     }
     
     const res = await fetch(`http://${window.location.hostname}:8080/contract/${inn.value}`, {
@@ -55,12 +51,12 @@ export default function TransporterAo({ inn, prevStep, nextStep }) {
 
 
   useEffect(function checkFields() {
-    if (partnerDetails.files.length > 0 && innCard.files.length > 0 && orrnCard.files.length > 0 && order.files.length > 0 && charter.files.length > 0) {
+    if (partnerDetails.files.length > 0 && innCard.files.length > 0 && passport1.files.length > 0 && passport2.files.length > 0 ) {
       setAllow(true);
     } else {
       setAllow(false);
     }
-  }, [partnerDetails, innCard, orrnCard, order, charter]);
+  }, [partnerDetails, innCard, passport1, passport2]);
 
 
   useEffect(function next() {
@@ -91,30 +87,21 @@ export default function TransporterAo({ inn, prevStep, nextStep }) {
         />
 
         <FilesUploader
-          label="Свидетельство ОГРН"
-          textHelper="Загрузите копию или фотографию свидетельства ОГРН партнера"
+          label="Паспорт (первая страница)"
+          textHelper="Загрузите копию или фотографию первой страницы паспорта партнера"
           required={true}
           multiple={false}
-          store={orrnCard}
-          setStore={setOgrnCard}
+          store={passport1}
+          setStore={setPassport1}
         />
 
         <FilesUploader
-          label="Приказ"
-          textHelper="Загрузите копию или фотографию приказа о назначении директора или права подписи"
+          label="Паспорт (страница прописки)"
+          textHelper="Загрузите копию или фотографию страницы прописки паспорта партнера"
           required={true}
           multiple={false}
-          store={order}
-          setStore={setOrder}
-        />
-
-        <FilesUploader
-          label="Устав"
-          textHelper="Загрузите копию или фотографию первой страницы Устава партнера"
-          required={true}
-          multiple={false}
-          store={charter}
-          setStore={setCharter}
+          store={passport2}
+          setStore={setPassport2}
         />
 
         {requestStatus === 'loading' && (

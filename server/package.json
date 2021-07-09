@@ -1,10 +1,11 @@
 {
   "name": "vympel-server",
-  "version": "0.0.0",
+  "author": "Anton Zakharov",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "PORT=8080 node ./bin/www",
-    "start:dev": "DEBUG=myapp:* PORT=8080 nodemon ./bin/www"
+    "start": "PORT=8080 node ./server",
+    "start:dev": "DEBUG=myapp:* PORT=8080 nodemon ./server"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

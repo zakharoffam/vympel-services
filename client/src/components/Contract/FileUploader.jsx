@@ -9,7 +9,7 @@ import {
 
 export default function FilesUploader({ label, textHelper, required, multiple, store, setStore }) {
   // Разрешенные расширения файлов
-  const acceptFile = '.pdf, .png, .bmp, .jpeg, .jpg, .gif, .doc, .docx, .txt, .ods, .odt, .xls, .xlsx';
+  const acceptFile = '.avi, .pdf, .png, .bmp, .jpeg, .jpg, .gif, .doc, .docx, .txt, .ods, .odt, .xls, .xlsx';
   // Максимальный размер файлов в байтах
   const maxSizeFile = 20971520;
 

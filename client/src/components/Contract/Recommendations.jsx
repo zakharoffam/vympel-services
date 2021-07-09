@@ -48,7 +48,7 @@ export default function Recommendations({ inn, prevStep, nextStep }) {
     formData.append('FINISH', 1);
 
     for (let i = 0; i < extraFiles.files.length; i++) {
-      formData.append('Трудовой договор', extraFiles.files[i]);
+      formData.append(`Дополнительный файл ${i + 1}`, extraFiles.files[i]);
     }
 
     const res = await fetch(`http://${window.location.hostname}:8080/contract/${inn.value}`, {
