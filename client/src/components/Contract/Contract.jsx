@@ -65,7 +65,7 @@ export default function Contract() {
       <Box className={classes.img}>
         <img src="../logo.png" alt="logo" height="100" />
         <Typography variant="h6">
-          Форма для сбора документов перевозчика, при заключении договора с <Link href="http://www.tekvympel.ru/" target="_blank">ТЭК "Вымпел"</Link>
+          Форма для сбора документов перевозчика, при заключении договора с ТЭК "Вымпел"
         </Typography>
       </Box>
 

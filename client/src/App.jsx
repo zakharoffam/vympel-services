@@ -6,7 +6,6 @@ import {
 
 import {
   Typography,
-  Link,
   Box,
 } from '@material-ui/core';
 
@@ -23,7 +22,7 @@ function App() {
           <Box style={{ textAlign: 'center' }}>
             <img src="../logo.png" alt="logo" height="100" />
             <Typography variant="h6">
-              <Link href="http://www.tekvympel.ru/" target="_blank">ТЭК "Вымпел"</Link>
+              ТЭК "Вымпел"
             </Typography>
           </Box>
         </Route>
@@ -40,7 +39,7 @@ function App() {
           <Box style={{ textAlign: 'center' }}>
             <img src="../logo.png" alt="logo" height="100" />
             <Typography variant="h6">
-              <Link href="http://www.tekvympel.ru/" target="_blank">ТЭК "Вымпел"</Link>
+              Страница не найдена
             </Typography>
           </Box>
         </Route>
