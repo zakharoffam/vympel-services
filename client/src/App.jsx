@@ -11,6 +11,7 @@ import {
 
 import Contract from './components/Contract/Contract';
 import Pers from './components/Contract/Pers';
+import Form from "./components/UploadForm/Form";
 
 
 function App() {
@@ -25,6 +26,10 @@ function App() {
               ТЭК "Вымпел"
             </Typography>
           </Box>
+        </Route>
+
+        <Route path="/upload-form" exact>
+          <Form />
         </Route>
         
         <Route path="/contract/:logist" exact>
