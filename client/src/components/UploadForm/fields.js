@@ -3,16 +3,18 @@ export const fieldsList = [
     title: 'Логист',
     name: 'logist',
     description: null,
-    step: 0, // На каком шаге отображать данное поле
-    stepTitle: 'Основные данные',
-    stepDescription: null,
+    step: {
+      index: 0,
+      title: 'Основные данные',
+      description: null,
+    },
     display: false, // Отображать поле или нет
     cached: false, // Кешируемое поле. Проверять ранее сохраненное значение в localStore
     type: 'text', // Тип поля. Возможны варианты: 'text', 'number', 'select', 'checkbox', 'file', 'files'
     possibleValues: [], // Возможные варианты для полей типа 'select' или 'checkbox'
     required: true, // Обязательно к заполнению
     defaultValue: null,
-    value: null,
+    value: '',
     error: false,
     errorMessage: null,
     sending: false,
@@ -22,16 +24,18 @@ export const fieldsList = [
     title: 'Название партнера',
     name: 'partnerName',
     description: null,
-    step: 0, // На каком шаге отображать данное поле
-    stepTitle: 'Основные данные',
-    stepDescription: null,
+    step: {
+      index: 0,
+      title: 'Основные данные',
+      description: null,
+    },
     display: true, // Отображать поле или нет
     cached: true, // Кешируемое поле. Проверять ранее сохраненное значение в localStore
     type: 'text', // Тип поля. Возможны варианты: 'text', 'number', 'select', 'checkbox', 'file', 'files'
     possibleValues: [], // Возможные варианты для полей типа 'select' или 'checkbox'
     required: true, // Обязательно к заполнению
     defaultValue: null,
-    value: null,
+    value: '',
     error: false,
     errorMessage: null,
     sending: false,
@@ -41,16 +45,18 @@ export const fieldsList = [
     title: 'Код АТИ',
     name: 'codeAti',
     description: null,
-    step: 0, // На каком шаге отображать данное поле
-    stepTitle: 'Основные данные',
-    stepDescription: null,
+    step: {
+      index: 0,
+      title: 'Основные данные',
+      description: null,
+    },
     display: true, // Отображать поле или нет
     cached: true, // Кешируемое поле. Проверять ранее сохраненное значение в localStore
     type: 'text', // Тип поля. Возможны варианты: 'text', 'number', 'select', 'checkbox', 'file', 'files'
     possibleValues: [], // Возможные варианты для полей типа 'select' или 'checkbox'
     required: true, // Обязательно к заполнению
     defaultValue: null,
-    value: null,
+    value: '',
     error: false,
     errorMessage: null,
     sending: false,
@@ -60,16 +66,18 @@ export const fieldsList = [
     title: 'ИНН',
     name: 'inn',
     description: 'Индивидуальный номер налогоплательщика ИП состоит из 12 цифр, для АО/ПАО/ЗАО/ООО из 10.',
-    step: 0, // На каком шаге отображать данное поле
-    stepTitle: 'Основные данные',
-    stepDescription: null,
+    step: {
+      index: 0,
+      title: 'Основные данные',
+      description: null,
+    },
     display: true, // Отображать поле или нет
     cached: true, // Кешируемое поле. Проверять ранее сохраненное значение в localStore
     type: 'number', // Тип поля. Возможны варианты: 'text', 'number', 'select', 'checkbox', 'file', 'files'
     possibleValues: null, // Возможные варианты для полей типа 'select' или 'checkbox'
     required: true, // Обязательно к заполнению
     defaultValue: null,
-    value: null,
+    value: '',
     error: false,
     errorMessage: null,
     sending: false,
@@ -79,9 +87,11 @@ export const fieldsList = [
     title: 'Форма собственности',
     name: 'ownershipType',
     description: null,
-    step: 0, // На каком шаге отображать данное поле
-    stepTitle: 'Основные данные',
-    stepDescription: null,
+    step: {
+      index: 0,
+      title: 'Основные данные',
+      description: null,
+    },
     display: true, // Отображать поле или нет
     cached: false, // Кешируемое поле. Проверять ранее сохраненное значение в localStore
     type: 'checkbox', // Тип поля. Возможны варианты: 'text', 'number', 'select', 'checkbox', 'file', 'files'
@@ -98,9 +108,11 @@ export const fieldsList = [
     title: 'Реквизиты',
     name: 'credentials',
     description: 'Загрузите карту партнера',
-    step: 1, // На каком шаге отображать данное поле
-    stepTitle: 'Перевозчик',
-    stepDescription: null,
+    step: {
+      index: 1,
+      title: 'Перевозчик',
+      description: null,
+    },
     display: true, // Отображать поле или нет
     cached: true, // Кешируемое поле. Проверять ранее сохраненное значение в localStore
     type: 'files', // Тип поля. Возможны варианты: 'text', 'number', 'select', 'checkbox', 'file', 'files'
@@ -117,9 +129,11 @@ export const fieldsList = [
     title: 'Свидетельство ИНН',
     name: 'certificateInn',
     description: null,
-    step: 1, // На каком шаге отображать данное поле
-    stepTitle: 'Перевозчик',
-    stepDescription: null,
+    step: {
+      index: 2,
+      title: 'Перевозчик2',
+      description: null,
+    },
     display: true, // Отображать поле или нет
     cached: true, // Кешируемое поле. Проверять ранее сохраненное значение в localStore
     type: 'file', // Тип поля. Возможны варианты: 'text', 'number', 'select', 'checkbox', 'file', 'files'

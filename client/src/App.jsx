@@ -9,9 +9,10 @@ import {
   Box,
 } from '@material-ui/core';
 
-import Contract from './components/Contract/Contract';
+// import Contract from './components/Contract/Contract';
 import Pers from './components/Contract/Pers';
 import Form from "./components/UploadForm/Form";
+import Contract from "./components/Contract/Contract";
 
 
 function App() {
