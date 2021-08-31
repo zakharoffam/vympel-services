@@ -11,6 +11,7 @@ import {
   TextField,
   Typography
 } from "@material-ui/core";
+import { useParams } from "react-router-dom";
 
 const useStyle = makeStyles(theme => ({
   root: {
@@ -35,6 +36,31 @@ const useStyle = makeStyles(theme => ({
   },
 }));
 
+/**
+ * Парсер строки параметров
+ * @param input window.location.search
+ * @returns {{}}
+ */
+function parseParams(input) {
+  if (typeof input !== 'string') return {};
+  if (input[0] !== '?') return {};
+
+  const params = {};
+  input.slice(1).split('&').forEach(elem => {
+    if (elem.split('=').length === 2) {
+      params[elem.split('=')[0]] = elem.split('=')[1];
+    }
+  });
+  return params;
+}
+
+/**
+ * Компонент поля ввода
+ * @param fieldName Имя поля
+ * @param state Объект всех полей
+ * @param setState Функция для изменения объекта всех полей
+ * @returns {JSX.Element} Возвращает либо текстовое поле ввода, либо поле для загрузки файлов
+ */
 function Field({ fieldName, state, setState }) {
   const classes = useStyle();
   const acceptFile = '.pdf, .png, .bmp, .jpeg, .jpg, .gif, .doc, .docx, .txt, .ods, .odt, .xls, .xlsx';
@@ -98,6 +124,9 @@ function Field({ fieldName, state, setState }) {
           fullWidth
           label={state[fieldName].title}
           value={state[fieldName].value}
+          required={state[fieldName].required}
+          error={state[fieldName].error}
+          helperText={state[fieldName].error}
           onChange={event => {
             setState({
               ...state,
@@ -160,9 +189,50 @@ function Field({ fieldName, state, setState }) {
 
 export default function Uploader() {
   const classes = useStyle();
-  const [isSubmit, setIsSubmit] = useState(false);
-  const [isDefaultForm, setIsDefaultForm] = useState(true);
+  // Входящий параметр из URL-запроса
+  const { logist } = useParams();
+  // Все дополнительные параметры
+  const params = parseParams(window.location.search);
+  // Состояние выгрузки данных
+  const [isSending, setIsSending] = useState(false);
+  // Является ли данная форма формой по-умолчанию, т.е. отображаются все поля
+  const isDefaultForm = !Object.keys(params).length;
+  // Текущий шаг формы
   const [step, setStep] = useState(0);
+  // Чек-бокс согласия на обработку персональных данных
+  const [consentToPersonalDataProcessing, setConsentToPersonalDataProcessing] = useState(false);
+  // Состояние всех полей
+  const [fields, setFields] = useState({
+    logist: { title: 'Логист', value: logist, display: isDefaultForm, required: true },
+    partnerName: { title: 'Название партнера', value: JSON.parse(localStorage.getItem('partnerName')) ?? '', display: isDefaultForm, required: true },
+    codeAti: { title: 'Код АТИ', value: JSON.parse(localStorage.getItem('codeAti')) ?? '', display: isDefaultForm, required: true },
+    inn: { title: 'ИНН партнера', value: JSON.parse(localStorage.getItem('inn')) ?? '', display: isDefaultForm, required: true },
+    ownershipType: { title: 'Форма собственности партнера', value: JSON.parse(localStorage.getItem('ownershipType')) ?? '', display: isDefaultForm, required: true },
+    partnerRequisites: { title: 'Реквизиты партнера', value: FileList, display: isDefaultForm, multiple: true, description: 'Описание' },
+    certificateInn: { title: 'Свидетельство ИНН', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
+    ipPassport1: { title: 'Паспорт ИП (основная страница)', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
+    ipPassport2: { title: 'Паспорт ИП (прописка)', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
+    certificateOgrn: { title: 'Свидетельство ОГРН', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
+    appointmentOrder: { title: 'Приказ о назначении', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
+    charter: { title: 'Устав', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
+    transportGosNumber: { title: 'Государственный номер ТС', value: '', display: isDefaultForm, required: true },
+    transportPts: { title: 'ПТС или СРТС ТС', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
+    trailerPts: { title: 'ПТС или СРТС прицепа', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
+    vehicleRentalAgreement: { title: 'Договор аренды ТС', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
+    driverName: { title: 'ФИО водителя', value: '', display: isDefaultForm, required: true },
+    driverPhone: { title: 'Телефон водителя', value: '', display: isDefaultForm, required: true },
+    driverPassportSerialNumber: { title: 'Серия и номер паспорта водителя', value: '', display: isDefaultForm, required: true },
+    driverPassport1: { title: 'Паспорт водителя (основная страница)', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
+    driverPassport2: { title: 'Паспорт водителя (прописка)', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
+    driverLicence: { title: 'Водительское удостоверение', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
+    driverEmploymentContract: { title: 'Трудовой договор', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
+    recommendation1CompanyTitle: { title: 'Название компании', value: '', display: isDefaultForm, required: true },
+    recommendation1ContactName: { title: 'Контактное лицо', value: '', display: isDefaultForm, required: true },
+    recommendation1ContactPhone: { title: 'Телефон контактного лица', value: '', display: isDefaultForm, required: true },
+    extraFiles: { title: 'Дополнительные файлы', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
+    FINISH: { title: 'FINISH', value: '', display: isDefaultForm, },
+  });
+  // Список шагов формы
   const steps = [
     'Основные данные',
     'Данные перевозчика',
@@ -171,50 +241,20 @@ export default function Uploader() {
     'Рекомендации',
     'Отправлено'
   ];
-  const [consentToPersonalDataProcessing, setConsentToPersonalDataProcessing] = useState(false);
 
-  const [fields, setFields] = useState({
-    logist: { title: 'Логист', value: '', display: isDefaultForm, },
-    partnerName: { title: 'Название партнера', value: '', display: isDefaultForm, },
-    codeAti: { title: 'Код АТИ', value: '', display: isDefaultForm, },
-    inn: { title: 'ИНН партнера', value: '', display: isDefaultForm, },
-    ownershipType: { title: 'Форма собственности партнера', value: '', display: isDefaultForm, },
-    partnerRequisites: { title: 'Реквизиты партнера', value: FileList, display: isDefaultForm, multiple: true, description: 'Описание' },
-    certificateInn: { title: 'Свидетельство ИНН', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
-    ipPassport1: { title: 'Паспорт ИП (основная страница)', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
-    ipPassport2: { title: 'Паспорт ИП (прописка)', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
-    certificateOgrn: { title: 'Свидетельство ОГРН', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
-    appointmentOrder: { title: 'Приказ о назначении', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
-    charter: { title: 'Устав', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
-    transportGosNumber: { title: 'Государственный номер ТС', value: '', display: isDefaultForm, },
-    transportPts: { title: 'ПТС или СРТС ТС', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
-    trailerPts: { title: 'ПТС или СРТС прицепа', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
-    vehicleRentalAgreement: { title: 'Договор аренды ТС', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
-    driverName: { title: 'ФИО водителя', value: '', display: isDefaultForm, },
-    driverPhone: { title: 'Телефон водителя', value: '', display: isDefaultForm, },
-    driverPassportSerialNumber: { title: 'Серия и номер паспорта водителя', value: '', display: isDefaultForm, },
-    driverPassport1: { title: 'Паспорт водителя (основная страница)', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
-    driverPassport2: { title: 'Паспорт водителя (прописка)', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
-    driverLicence: { title: 'Водительское удостоверение', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
-    driverEmploymentContract: { title: 'Трудовой договор', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
-    recommendation1CompanyTitle: { title: 'Название компании', value: '', display: isDefaultForm, },
-    recommendation1ContactName: { title: 'Контактное лицо', value: '', display: isDefaultForm, },
-    recommendation1ContactPhone: { title: 'Телефон контактного лица', value: '', display: isDefaultForm, },
-    extraFiles: { title: 'Дополнительные файлы', value: FileList, display: isDefaultForm, multiple: false, description: 'Описание' },
-    FINISH: { title: 'FINISH', value: '', display: isDefaultForm, },
-  });
-
-  const submitFields = () => {
-
-  }
-
-  const nextStep = (currentStep) => {
-    setIsSubmit(true);
+  /**
+   * Отправка заполненных полей и перехода на следующий шаг
+   * @param currentStep
+   */
+  const nextStepAndSubmitFields = (currentStep) => {
+    setIsSending(true);
+    let isFieldRequiredNotFull = false;
     const formData = new FormData();
 
     for (let key in fields) {
-      if (fields[key].display && !fields[key].isSubmit) {
+      if (fields[key].display && !fields[key].isSent) {
         if (typeof fields[key].value === 'string' && fields[key].value) {
+          localStorage.setItem(key, JSON.stringify(fields[key].value));
           formData.append(fields[key].title, fields[key].value);
         } else if (fields[key].value instanceof FileList) {
           for (let i = 0; i < fields[key].value.length; i++) {
@@ -228,28 +268,40 @@ export default function Uploader() {
       formData.append('FINISH', String(1));
     }
 
-    fetch(
-      `http://${window.location.hostname}:8080/upload-form/${fields.inn.value}`,
-      {
+    fetch(`http://${window.location.hostname}:8080/upload-form/${fields.inn.value}`, {
         method: 'PUT',
         body: formData,
       }
-    ).then(res => {
-      for (let key in fields) {
-        if (fields[key].display && fields[key].value.length > 0) {
-          setFields({
-            ...fields,
-            [key]: {...fields[key], isSubmit: true}
-          });
+    ).then(() => {
+      const nextStateFields = Object.assign(fields);
+      for (let key in nextStateFields) {
+        if (nextStateFields[key].value.length) {
+          nextStateFields[key].isSent = true;
         }
       }
+      setFields(nextStateFields);
     }).catch(err => {
       console.log(err);
     }).finally(() => {
-      setStep(currentStep + 1);
-      setIsSubmit(false);
+      if (!isFieldRequiredNotFull) {
+        setStep(currentStep + 1);
+      }
+      setIsSending(false);
     });
   }
+
+  useEffect(() => {
+    if (!isDefaultForm) { // если форма не по-умолчанию
+      Object.keys(params).forEach(key => { // перебираем все параметры
+        const nextStateFields = Object.assign(fields);
+        nextStateFields[key].display = true; // и отображаем поля по которым есть параметр
+        if (Number(params[key]) !== 1) {
+          nextStateFields[key].value = params[key]; // если параметр имеет значение, заполняем поле
+        }
+        setFields(nextStateFields);
+      });
+    }
+  }, [isDefaultForm, params, fields]);
 
   useEffect(() => {
     console.log(fields);
@@ -265,7 +317,7 @@ export default function Uploader() {
       </Box>
 
       <Stepper activeStep={step} orientation="vertical">
-        {steps.map((label, index) => (
+        {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
             <StepContent>
@@ -369,29 +421,19 @@ export default function Uploader() {
                 </Box>
               )}
 
-              {(step !== 0 && step !== 5) && (
-                <Button
-                  className={classes.button}
-                  variant={'contained'}
-                  color={'primary'}
-                  onClick={() => setStep(step - 1)}
-                >
-                  Назад
-                </Button>
-              )}
               {step !== steps.length - 1 && (
                 <Button
                   className={classes.button}
                   variant={'contained'}
                   color={'primary'}
                   disabled={!(consentToPersonalDataProcessing && fields.ownershipType.value)}
-                  onClick={() => nextStep(step)}
+                  onClick={() => nextStepAndSubmitFields(step)}
                 >
                   Далее
                 </Button>
               )}
 
-              {isSubmit && <LinearProgress className={classes.linearProgress} color="primary" />}
+              {isSending && <LinearProgress className={classes.linearProgress} color="primary" />}
             </StepContent>
           </Step>
         ))}

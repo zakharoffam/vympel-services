@@ -29,7 +29,7 @@ function App() {
           </Box>
         </Route>
 
-        <Route path="/uploader" exact>
+        <Route path="/uploader/:logist" exact>
           <Uploader />
         </Route>
         
