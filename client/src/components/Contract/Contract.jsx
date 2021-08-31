@@ -46,7 +46,7 @@ export default function Contract() {
   const classes = useStyles();
 
   const [activeStep, setActiveStep] = useState(0);
-  const steps = ['Основые данные', 'Данные перевозчика', 'Документы на автомобиль', 'Документы водителя', 'Рекомендации'];
+  const steps = ['Основные данные', 'Данные перевозчика', 'Документы на автомобиль', 'Документы водителя', 'Рекомендации'];
 
   const [partnerType, setPartnerType] = useState('ИП');
   const [inn, setInn] = useState({ message: null, value: ''});

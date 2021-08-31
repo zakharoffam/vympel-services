@@ -9,8 +9,10 @@ import {
   Box,
 } from '@material-ui/core';
 
-import Contract from './components/Contract/Contract';
+// import Contract from './components/Contract/Contract';
 import Pers from './components/Contract/Pers';
+import Contract from "./components/Contract/Contract";
+import Uploader from "./components/UploadForm/Uploader";
 
 
 function App() {
@@ -25,6 +27,10 @@ function App() {
               ТЭК "Вымпел"
             </Typography>
           </Box>
+        </Route>
+
+        <Route path="/uploader/:logist" exact>
+          <Uploader />
         </Route>
         
         <Route path="/contract/:logist" exact>
